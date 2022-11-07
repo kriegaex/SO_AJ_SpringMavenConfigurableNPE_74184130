@@ -1,0 +1,32 @@
+<!DOCTYPE aspectj PUBLIC "-//AspectJ//DTD//EN" "https://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+
+  <!--
+    The first two options suppress a few warnings, the other two help us watch the aspect weaver do its job.
+    None of these options are strictly necessary.
+  -->
+  <weaver options="-Xset:weaveJavaxPackages=true -Xreweavable -verbose -showWeaveInfo">
+    <!-- Only weave classes in our application-specific packages -->
+    <include within="com.example.demo2..*"/>
+  </weaver>
+
+  <aspects>
+    <!-- FYI, these are defined in spring-aspects-5.3.23.jar!/META-INF/aop.xml -->
+    <!--
+    <aspect name="org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect"/>
+    <aspect name="org.springframework.scheduling.aspectj.AnnotationAsyncExecutionAspect"/>
+    <aspect name="org.springframework.transaction.aspectj.AnnotationTransactionAspect"/>
+    <aspect name="org.springframework.transaction.aspectj.JtaAnnotationTransactionAspect"/>
+    <aspect name="org.springframework.cache.aspectj.AnnotationCacheAspect"/>
+    <aspect name="org.springframework.cache.aspectj.JCacheCacheAspect"/>
+    -->
+
+    <!--
+      Not strictly necessary, but let us avoid a few warnings on the console
+      by explicitly activating only the bean configurer aspect.
+      We do not need scheduling, transactions or caching for this example.
+    -->
+    <include within="org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect"/>
+  </aspects>
+
+</aspectj>
